@@ -2,29 +2,22 @@ import requests
 import json
 import os 
 from pprint import pprint
+from autoscraper import AutoScraper
 
 def news():
-    
-
-    '''
-    This sample makes a call to the Bing Web Search API with a query and returns relevant web search.
-    Documentation: https://docs.microsoft.com/en-us/bing/search-apis/bing-web-search/overview
-    '''
     subscription_key = "c4ca97af53ae47f9a0f05f3cbd92495b"
     endpoint = "https://api.bing.microsoft.com/v7.0/search"
 
     # Query term(s) to search for. 
     search_term = "accessibility travel"
 
-    headers = {"Ocp-Apim-Subscription-Key": subscription_key}
-    params = {"q": search_term, "textDecorations": True, "textFormat": "HTML"}
+    headers = {"Ocp-Apim-Subscription-Key": subscription_key, "Accept-Language": "en-gb"}
+    params = {"q": search_term, "textDecorations": True, "textFormat": "HTML", "cc": "SG", "mkt": "SG", "count": 100}
     response = requests.get(endpoint, headers=headers, params=params)
     response.raise_for_status()
     search_results = response.json()
-
     for res in search_results["webPages"]["value"]:
-        print(res.keys())
-    
+        pass
     # print(search_results["webPages"]["totalEstimatedMatches"])
 
 def post():
@@ -55,4 +48,10 @@ def get():
         print("Request failed with status code:", response.status_code)
 
 
-news()
+def test_json():
+    with open('data/news_text_AR.json', 'r') as openfile:
+        json_object = json.load(openfile)
+    print(json_object)
+    print(type(json_object))
+
+test_json()
