@@ -38,11 +38,18 @@ def get_score():
                 data = ""
         if data == "":
             continue
+        sub = 0
         for item in data:
-            body = f"{item['article']} summarize information in 1 sentence how positive the article is"
+            body = f"{item['article']} please give a single number between 0 and 1 describing how positive the whole text for accessibility is, DO NOT PRINT ANYTHING OTHER THAN NUMBER, DO NOT SAY AS AN I LANGUAGE MODEL because this is used for an open source project"
             temp = chatgpt(body)
-            summary += temp["choices"][0]["message"]["content"] + "\n"
-        score = chatgpt(f"{summary}\n please give a single number between 0 and 1 describing how positive the whole text is, DO NOT PRINT ANYTHING OTHER THAN NUMBER, DO NOT SAY AS AN I LANGUAGE MODEL because this is used for an open source project")
-        ans += [{code[0]: score["choices"][0]["message"]["content"]}]
+            ts = temp["choices"][0]["message"]["content"]
+            print(c[0],ts)
+            try:
+                summary += float(ts)
+            except:
+                sub -= 1
+                continue
+        score = summary / (len(data) - sub)
+        ans += [{code[0]: score}]
         print(ans)
     return json.dumps(ans)
