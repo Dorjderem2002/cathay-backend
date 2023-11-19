@@ -34,10 +34,9 @@ def get_score():
         with open(file, 'r') as file:
             data = json.load(file)
         for item in data:
-            body = f"{item['article']} summarize information in 1 sentence whether article is talking good or bad about support and help for disabled people"
-            ans = chatgpt(body)
-            summary += ans["choices"][0]["message"]["content"]
-        score = chatgpt(f"{summary}\n please give a single number between 0 and 1 describing how friendly the country is to disabled people given the cirsumstance, DO NOT PRINT ANYTHING OTHER THAN SINGLE FLOATING POINT NUMBER!")
+            body = f"{item['article']} summarize information in 1 sentence how positive the article is"
+            temp = chatgpt(body)
+            summary += temp["choices"][0]["message"]["content"] + "\n"
+        score = chatgpt(f"{summary}\n please give a single number between 0 and 1 describing how positive the whole text is, DO NOT PRINT ANYTHING OTHER THAN NUMBER")
         ans += [score["choices"][0]["message"]["content"]]
-        print(score)
     return ans
