@@ -43,7 +43,7 @@ def get_score():
             body = f"{item['article']} please give a single number between 0 and 1 describing how positive the whole text for accessibility is, DO NOT PRINT ANYTHING OTHER THAN NUMBER, DO NOT SAY AS AN I LANGUAGE MODEL because this is used for an open source project"
             temp = chatgpt(body)
             ts = temp["choices"][0]["message"]["content"]
-            print(c[0],ts)
+            print(code[0],ts)
             try:
                 summary += float(ts)
             except:
