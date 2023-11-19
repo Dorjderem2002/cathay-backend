@@ -36,7 +36,7 @@ def post():
         print("Request failed with status code:", response.status_code)
 
 def get():
-    url = "http://127.0.0.1:5000"
+    url = "http://127.0.0.1:5000/score"
 
     response = requests.get(url)
 
@@ -54,4 +54,4 @@ def test_json():
     print(json_object)
     print(type(json_object))
 
-test_json()
+get()
