@@ -39,4 +39,5 @@ def get_score():
             summary += temp["choices"][0]["message"]["content"] + "\n"
         score = chatgpt(f"{summary}\n please give a single number between 0 and 1 describing how positive the whole text is, DO NOT PRINT ANYTHING OTHER THAN NUMBER")
         ans += [score["choices"][0]["message"]["content"]]
-    return ans
+        print(ans)
+    return json.dumps(ans)
