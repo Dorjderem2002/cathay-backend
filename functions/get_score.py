@@ -37,7 +37,7 @@ def get_score():
             body = f"{item['article']} summarize information in 1 sentence how positive the article is"
             temp = chatgpt(body)
             summary += temp["choices"][0]["message"]["content"] + "\n"
-        score = chatgpt(f"{summary}\n please give a single number between 0 and 1 describing how positive the whole text is, DO NOT PRINT ANYTHING OTHER THAN NUMBER")
+        score = chatgpt(f"{summary}\n please give a single number between 0 and 1 describing how positive the whole text is, DO NOT PRINT ANYTHING OTHER THAN NUMBER, DO NOT SAY AS AN I LANGUAGE MODEL...")
         ans += [score["choices"][0]["message"]["content"]]
         print(ans)
     return json.dumps(ans)
